@@ -1,0 +1,10 @@
+apiVersion: v1 # API version for core Kubernetes resources
+kind: Pod # Resource type is a Pod
+metadata:
+  name: my-simple-app # Name of the Pod
+  labels:
+    app: my-simple-app # Label to identify the Pod
+spec:
+  containers:
+    - name: my-container # Name of the container
+      image: nginx:latest # Container image to run
