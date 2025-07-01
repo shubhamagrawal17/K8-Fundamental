@@ -22,9 +22,7 @@ kubectl get namespaces
 ✅ Step 2: Create a New Namespace
 Create a Namespace named development:
 
-bash
-Copy
-Edit
+```bash
 kubectl create namespace development
 You should see:
 
