@@ -1,0 +1,12 @@
+# pod-nginx-dev.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-dev-pod
+  namespace: development # <<< Specifying the namespace here
+spec:
+  containers:
+    - name: nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
