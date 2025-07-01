@@ -16,8 +16,7 @@ This guide walks you through how to create, use, and manage **Kubernetes Namespa
 - Basic understanding of YAML files
 
 ---
-
-## 🔍 Step 1: Check Existing Namespaces
+ 🔍 Step 1: Check Existing Namespaces
 
 ```bash
 kubectl get namespaces
@@ -127,7 +126,4 @@ Namespaces help you:
 
 Happy Learning! 🎓🚀
 
-```
-
-Let me know if you'd like a downloadable `.md` file or a sample YAML manifest included in your repo.
 ```
