@@ -25,7 +25,7 @@ kubectl get namespaces
 
 This command lists all the Namespaces currently available in your cluster.
 
----
+
 
 ## 🏗️ Step 2: Create a New Namespace
 
