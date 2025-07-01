@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-pod
+  labels:
+    app: database
+    environment: dev
+    type: postgres
+spec:
+  containers:
+    - name: db-container
+      image: postgres:13
+      ports:
+        - containerPort: 5432
+      env: # <--- Add this section
+        - name: POSTGRES_PASSWORD
+          value: "mysecretpassword" # <--- Replace with a strong password!
+      # - name: POSTGRES_USER       # Optional: Define a specific user
+      #   value: "myuser"
+      # - name: POSTGRES_DB        # Optional: Define a specific database name
+      #   value: "mydatabase"
