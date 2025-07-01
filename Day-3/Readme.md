@@ -16,15 +16,13 @@ This guide walks you through how to create, use, and manage **Kubernetes Namespa
 - Basic understanding of YAML files
 
 ---
- 🔍 Step 1: Check Existing Namespaces
+
+##🔍 Step 1: Check Existing Namespaces
 
 ```bash
 kubectl get namespaces
-````
-
+```
 This command lists all the Namespaces currently available in your cluster.
-
-
 
 ## 🏗️ Step 2: Create a New Namespace
 
