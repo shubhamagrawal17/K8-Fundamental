@@ -121,7 +121,7 @@ To make your rollout history more meaningful, use the `--record` flag when apply
    metadata:
      name: nginx-deployment
      annotations: # <<< Add this section
-       kubernetes.io/change-cause: # Apply the change
+       kubernetes.io/change-cause: "Updated Nginx to latest stable version or mention the version"
    ```
 
 3. Check the updated rollout history again:
