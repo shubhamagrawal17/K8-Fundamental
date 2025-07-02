@@ -3,7 +3,7 @@ Here's your content professionally formatted as a `README.md` file for a GitHub 
 ---
 
 ````markdown
-# 🚀 Kubernetes ReplicaSet & Deployment Demo
+🚀 Kubernetes ReplicaSet & Deployment Demo
 
 This guide walks you through hands-on examples of using **ReplicaSets** and **Deployments** in Kubernetes — including self-healing, rolling updates, and rollbacks.
 
