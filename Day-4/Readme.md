@@ -113,10 +113,15 @@ To make your rollout history more meaningful, use the `--record` flag when apply
 
 1. Make a small change in `deployment-nginx.yaml` (e.g., update the image to `nginx:1.18.0`).
 
-2. Then apply the updated file **with the `--record` flag**:
+2. Add the kubernetes.io/change-cause annotation under metadata.annotations in your Deployment's YAML.
 
    ```bash
-   kubectl apply -f deployment-nginx.yaml --record
+   apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  annotations: # <<< Add this section
+    kubernetes.io/change-cause: # Apply the change
    ```
 
 3. Check the updated rollout history again:
