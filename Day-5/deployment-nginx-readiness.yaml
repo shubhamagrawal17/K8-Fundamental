@@ -1,0 +1,40 @@
+# deployment-nginx-readiness.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-readiness
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-readiness
+  template:
+    metadata:
+      labels:
+        app: nginx-readiness
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          readinessProbe: # <<< Readiness Probe definition
+            httpGet:
+              path: /index.html # A valid path for Nginx
+              port: 80
+            initialDelaySeconds: 15 # Wait 15 seconds before first check
+            periodSeconds: 5
+            failureThreshold: 1
+---
+apiVersion: v1 # And a Service to expose it
+kind: Service
+metadata:
+  name: nginx-readiness-service
+spec:
+  selector:
+    app: nginx-readiness
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort # Or LoadBalancer if on cloud

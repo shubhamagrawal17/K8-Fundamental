@@ -1,0 +1,27 @@
+# deployment-nginx-liveness.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-liveness
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-liveness
+  template:
+    metadata:
+      labels:
+        app: nginx-liveness
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          livenessProbe: # <<< Liveness Probe definition
+            httpGet:
+              path: /nonexistent-health-check # This path does not exist on Nginx, so it will fail
+              port: 80
+            initialDelaySeconds: 5 # Wait 5 seconds before first probe
+            periodSeconds: 5 # Check every 5 seconds
+            failureThreshold: 1 # Fail after 1 unsuccessful attempt
