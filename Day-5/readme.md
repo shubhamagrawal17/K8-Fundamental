@@ -1,5 +1,5 @@
 
-````markdown
+
 # 🚦 Kubernetes Liveness & Readiness Probes (Day 5)
 
 This guide covers how to use **Liveness** and **Readiness Probes** in Kubernetes to monitor and manage the health of your applications — with hands-on demos using simple NGINX deployments.
