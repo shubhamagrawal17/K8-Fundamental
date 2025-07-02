@@ -130,15 +130,3 @@ kubectl delete -f deployment-nginx-readiness.yaml
 
 ---
 
-## 🎬 Coming Up Next
-
-➡️ **Day 6: Kubernetes Services & Ingress – Making Your App Accessible**
-
----
-
-👍 If you found this helpful, star ⭐ the repo, share it with your team, and subscribe for the full Kubernetes learning series!
-
-```
-
-Let me know if you want me to convert this into a downloadable `.md` file as well!
-```
