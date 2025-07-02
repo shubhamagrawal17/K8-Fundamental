@@ -14,7 +14,6 @@ This guide walks you through hands-on examples of using **ReplicaSets** and **De
 
 ```bash
 kubectl apply -f replicaset-nginx.yaml
-````
 
 ### 2️⃣ View Pods and the ReplicaSet
 
