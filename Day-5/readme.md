@@ -15,7 +15,7 @@ This guide covers how to use **Liveness** and **Readiness Probes** in Kubernetes
   kubectl delete all --all
 ````
 
----
+
 
 ## 🧪 Part 1: Basic NGINX Deployment (No Probes)
 
