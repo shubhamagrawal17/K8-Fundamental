@@ -117,11 +117,11 @@ To make your rollout history more meaningful, use the `--record` flag when apply
 
    ```bash
    apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-  annotations: # <<< Add this section
-    kubernetes.io/change-cause: # Apply the change
+   kind: Deployment
+   metadata:
+     name: nginx-deployment
+     annotations: # <<< Add this section
+       kubernetes.io/change-cause: # Apply the change
    ```
 
 3. Check the updated rollout history again:
