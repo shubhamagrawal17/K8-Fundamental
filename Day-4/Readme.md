@@ -7,7 +7,6 @@ Here's your content professionally formatted as a `README.md` file for a GitHub 
 
 This guide walks you through hands-on examples of using **ReplicaSets** and **Deployments** in Kubernetes — including self-healing, rolling updates, and rollbacks.
 
----
 
 🧱 Part 1: ReplicaSet Demo
 
