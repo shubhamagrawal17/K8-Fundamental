@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+spec:
+  replicas: 3 # We want 3 copies of our Nginx Pod
+  selector:
+    matchLabels:
+      app: nginx-rs-app # This selector must match the Pod's labels
+  template: # This is the Pod template for the ReplicaSet
+    metadata:
+      labels:
+        app: nginx-rs-app # Pod's labels
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2 # Using a specific old version for demo update later
+          ports:
+            - containerPort: 80
