@@ -9,9 +9,9 @@ This guide walks you through hands-on examples of using **ReplicaSets** and **De
 
 ---
 
-## 🧱 Part 1: ReplicaSet Demo
+🧱 Part 1: ReplicaSet Demo
 
-### 1️⃣ Apply the ReplicaSet
+ 1️⃣ Apply the ReplicaSet
 
 ```bash
 kubectl apply -f replicaset-nginx.yaml
