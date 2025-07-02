@@ -1,6 +1,8 @@
+Got it! Here's your **GitHub-friendly `README.md`** for **Day 5: Kubernetes Liveness & Readiness Probes**, **without YAML blocks**, cleanly formatted and ready to publish:
+
 ---
 
-
+````markdown
 # 🚦 Kubernetes Liveness & Readiness Probes (Day 5)
 
 This guide covers how to use **Liveness** and **Readiness Probes** in Kubernetes to monitor and manage the health of your applications — with hands-on demos using simple NGINX deployments.
@@ -127,3 +129,16 @@ kubectl delete -f deployment-nginx-readiness.yaml
 | Readiness | Is the app ready for traffic? | Pod removed from Service    |
 
 ---
+
+## 🎬 Coming Up Next
+
+➡️ **Day 6: Kubernetes Services & Ingress – Making Your App Accessible**
+
+---
+
+👍 If you found this helpful, star ⭐ the repo, share it with your team, and subscribe for the full Kubernetes learning series!
+
+```
+
+Let me know if you want me to convert this into a downloadable `.md` file as well!
+```
