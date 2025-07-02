@@ -1,6 +1,3 @@
-Got it! Here's your **GitHub-friendly `README.md`** for **Day 5: Kubernetes Liveness & Readiness Probes**, **without YAML blocks**, cleanly formatted and ready to publish:
-
----
 
 ````markdown
 # 🚦 Kubernetes Liveness & Readiness Probes (Day 5)
