@@ -102,7 +102,8 @@ You might have noticed that when we ran kubectl rollout history, the 'CHANGE-CAU
 
 ```bash
 kubectl apply -f deployment-nginx.yaml --record
-
+---
+---
 ### 4️⃣ Rollback to the Previous Version
 
 ```bash
