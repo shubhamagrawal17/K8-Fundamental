@@ -1,19 +1,23 @@
 Here's your content professionally formatted as a `README.md` file for a GitHub repo — with clear structure, code blocks, and section highlights:
 
----
+
 
 ````markdown
-🚀 Kubernetes ReplicaSet & Deployment Demo
+# 🚀 Kubernetes ReplicaSet & Deployment Demo
 
 This guide walks you through hands-on examples of using **ReplicaSets** and **Deployments** in Kubernetes — including self-healing, rolling updates, and rollbacks.
 
+---
 
-🧱 Part 1: ReplicaSet Demo
+## 🧱 Part 1: ReplicaSet Demo
 
- 1️⃣ Apply the ReplicaSet
+### 1️⃣ Apply the ReplicaSet
 
 ```bash
 kubectl apply -f replicaset-nginx.yaml
+````
+
+---
 
 ### 2️⃣ View Pods and the ReplicaSet
 
