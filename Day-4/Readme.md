@@ -96,14 +96,27 @@ kubectl get deploy
 ```bash
 kubectl rollout history deployment nginx-deployment
 ```
-You might have noticed that when we ran kubectl rollout history, the 'CHANGE-CAUSE' column shows <none>. This happens because, by default, Kubernetes doesn't automatically record a description of why you made a change. To fix this and make our history more useful, we can use a special flag when we apply our changes: the --record flag.
- 
- > Modify deployment-nginx.yaml again (e.g., change image to nginx:1.18.0 or some other small change).
+📌 You might notice the CHANGE-CAUSE column says <none>.
+This is because Kubernetes doesn't automatically track why a change was made.
 
-```bash
+🛠 How to Record Change History
+To make your rollout history more meaningful, use the --record flag when applying changes.
+
+Make a small change in deployment-nginx.yaml (e.g., update the image to nginx:1.18.0).
+
+Then apply the updated file with the --record flag:
+
+bash
+Copy
+Edit
 kubectl apply -f deployment-nginx.yaml --record
----
----
+Now, when you check the rollout history again, the CHANGE-CAUSE will be populated:
+
+bash
+Copy
+Edit
+kubectl rollout history deployment nginx-deployment
+
 ### 4️⃣ Rollback to the Previous Version
 
 ```bash
