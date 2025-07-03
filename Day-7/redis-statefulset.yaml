@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: "redis-headless" # Must match the name of the headless service
+  replicas: 1 # One Redis instance
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest # Official Redis image
+          command: # Start Redis with AOF persistence
+            - "redis-server"
+            - "--appendonly"
+            - "yes"
+            - "--dir"
+            - "/data"
+          ports:
+            - containerPort: 6379 # Redis default port
+              name: redis
+          volumeMounts:
+            - name: redis-data # Attach volume at /data for persistence
+              mountPath: /data
+          livenessProbe: # Check if Redis is alive
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+          readinessProbe: # Check if Redis is ready to accept connections
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes: ["ReadWriteOnce"] # One pod at a time can write
+        resources:
+          requests:
+            storage: 1Gi # 1 GB persistent volume

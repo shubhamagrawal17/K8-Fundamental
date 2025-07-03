@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook-frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  replicas: 2 # Scale to 2 instances for high availability
+  selector:
+    matchLabels:
+      app: guestbook
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: guestbook
+        tier: frontend
+    spec:
+      containers:
+        - name: frontend-container
+          image: shubham17/my-nodejs-app:1.0 # Your custom image
+          ports:
+            - containerPort: 80
+          env:
+            - name: REDIS_HOST
+              value: "redis-0.redis-headless" # Connects directly to the first Redis pod
+            - name: REDIS_PORT
+              value: "6379"
