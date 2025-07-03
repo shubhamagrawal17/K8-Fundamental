@@ -1,0 +1,13 @@
+# nginx-service-loadbalancer.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-loadbalancer-service
+spec:
+  selector:
+    app: nginx-demo
+  ports:
+  - protocol: TCP
+    port: 80 # Service port
+    targetPort: 80 # Container port
+  type: LoadBalancer # Will provision a LoadBalancer on cloud, or simulate on Docker Desktop

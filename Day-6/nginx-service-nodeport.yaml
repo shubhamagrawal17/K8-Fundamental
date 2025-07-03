@@ -1,0 +1,14 @@
+# nginx-service-nodeport.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport-service
+spec:
+  selector:
+    app: nginx-demo
+  ports:
+  - protocol: TCP
+    port: 80 # Service port
+    targetPort: 80 # Container port
+    nodePort: 30080 # Optional: You can specify a port in the 30000-32767 range. If omitted, K8s picks one.
+  type: NodePort

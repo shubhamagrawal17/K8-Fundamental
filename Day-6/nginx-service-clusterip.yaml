@@ -1,0 +1,13 @@
+# nginx-service-clusterip.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip-service
+spec:
+  selector:
+    app: nginx-demo # Selects pods with this label
+  ports:
+  - protocol: TCP
+    port: 80 # The port the service exposes
+    targetPort: 80 # The port the container listens on
+  type: ClusterIP # Default, but explicitly stated

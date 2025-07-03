@@ -1,0 +1,42 @@
+# nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
+  labels:
+    app: nginx-demo
+spec:
+  replicas: 3 # Let's run 3 Nginx pods for load balancing demo
+  selector:
+    matchLabels:
+      app: nginx-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-demo
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25.3-alpine # Using a lightweight Nginx image
+        ports:
+        - containerPort: 80 # Nginx listens on port 80 by default
+        
+        # --- Liveness Probe ---
+        # Tells Kubernetes when to restart the container
+        livenessProbe:
+          httpGet:
+            path: / # Path to check
+            port: 80 # Port to check
+          initialDelaySeconds: 5 # Wait 5 seconds before first probe
+          periodSeconds: 5     # Check every 5 seconds
+          failureThreshold: 3  # After 3 failed attempts, restart the container
+
+        # --- Readiness Probe ---
+        # Tells Kubernetes when the container is ready to accept traffic
+        readinessProbe:
+          httpGet:
+            path: / # Path to check
+            port: 80 # Port to check
+          initialDelaySeconds: 10 # Wait 10 seconds before first probe
+          periodSeconds: 5      # Check every 5 seconds
+          failureThreshold: 3   # After 3 failed attempts, remove from service endpoints
