@@ -1,0 +1,21 @@
+apiVersion: batch/v1 # API version for the Job resource
+kind: Job # Declares this as a Kubernetes Job
+metadata:
+  name: retry-fail-job # Name of the Job
+
+spec:
+  template: # Pod template specification
+    spec:
+      containers:
+        - name: failing-container # Name of the container
+          image: busybox # Uses the BusyBox image (lightweight Linux distro)
+          command: # Command to run inside the container
+            ["/bin/sh", "-c", "echo 'Simulating a failure...'; exit 1;"]
+            # The command prints a message and then exits with code 1 (failure)
+      restartPolicy:
+        Never # Ensures the container is not restarted by the kubelet;
+        # the Job controller will handle retries by starting a new Pod
+
+  backoffLimit:
+    3 # The Job will retry up to 3 times if the Pod fails;
+    # after 3 failed attempts, the Job will be marked as failed

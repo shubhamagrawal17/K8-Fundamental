@@ -1,0 +1,21 @@
+apiVersion: batch/v1 # Specifies the API version for the Job resource
+kind: Job # Defines the type of Kubernetes resource (Job)
+metadata:
+  name: hello-k8s-job # Name of the Job
+
+spec:
+  template: # Pod template that describes the pod to be created by the Job
+    spec:
+      containers:
+        - name: hello-container # Name of the container inside the pod
+          image: busybox # Container image to use (lightweight Linux image)
+          command: # Command to run inside the container
+            [
+              "/bin/sh",
+              "-c",
+              "echo 'Hello from my Kubernetes Job!'; sleep 7; echo 'Task Finished Successfully!'",
+            ]
+            # This will print a message, wait for 7 seconds, and then print another message
+      restartPolicy:
+        Never # Important: Job controller handles retries by creating new Pods,
+        # so this should be set to 'Never'

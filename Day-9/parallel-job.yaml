@@ -1,0 +1,28 @@
+apiVersion: batch/v1 # API version for Kubernetes Job resources
+kind: Job # Declares this as a Kubernetes Job
+metadata:
+  name: parallel-workers # Name of the Job
+
+spec:
+  completions: 5 # Total number of successful Pods needed for Job completion
+  parallelism:
+    2 # Maximum number of Pods running at the same time
+    # Kubernetes will launch up to 2 Pods in parallel, until 5 completions are reached
+
+  template: # Pod template - defines the Pods that the Job will manage
+    spec:
+      containers:
+        - name: worker-container # Name of the container inside the Pod
+          image: busybox # Uses the BusyBox image (lightweight and ideal for small tasks)
+          command:
+            [
+              "/bin/sh",
+              "-c",
+              "echo 'Worker $(hostname) processing...'; sleep 3; echo 'Worker $(hostname) finished.'",
+            ]
+            # This simulates some work by printing, sleeping for 3 seconds, and then printing again
+            # $(hostname) gives each Pod a unique identifier in logs
+
+      restartPolicy:
+        OnFailure # If the container fails, Kubernetes will restart the Pod;
+        # The Job will keep retrying failed Pods until all completions are met
