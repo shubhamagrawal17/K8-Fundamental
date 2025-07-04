@@ -1,26 +1,26 @@
 # node-info-daemonset.yaml
 apiVersion: apps/v1
-kind: DaemonSet
+kind: DaemonSet # Ensures that a copy of the pod runs on all (or some) nodes
 metadata:
-  name: node-info-collector
+  name: node-info-collector # Name of the DaemonSet
   labels:
-    app: node-info-collector
+    app: node-info-collector # Labels used for identifying and selecting the DaemonSet
 spec:
   selector:
     matchLabels:
-      app: node-info-collector
+      app: node-info-collector # Ensures that the DaemonSet only manages pods with this label
   template:
     metadata:
       labels:
-        app: node-info-collector #Labels for the Pods created by this DaemonSet.
+        app: node-info-collector # Labels assigned to the pods created by the DaemonSet
     spec:
-      # We don't need nodeSelector or tolerations here, as we want it on the default node.
+      # No nodeSelector or tolerations defined, so pods will be scheduled on all schedulable default nodes
       containers:
-        - name: info-collector-container
-          image: busybox:latest # A small, simple image
-          command: ["sh", "-c"]
+        - name: info-collector-container # Name of the container inside the pod
+          image: busybox:latest # Uses the latest BusyBox image — a minimal Linux distribution with basic shell utilities
+          command: ["sh", "-c"] # Executes a shell command
           args:
             [
               "while true; do echo 'Hello from node: $(hostname) at $(date)'; sleep 5; done",
-            ]
-      terminationGracePeriodSeconds: 5 #This gives the Pod a short time to shut down gracefully when a node is removed or the DaemonSet is deleted.
+            ] # Infinite loop printing a message with hostname and date every 5 seconds
+      terminationGracePeriodSeconds: 5 # Allows the pod 5 seconds to shut down gracefully on deletion or node drain
