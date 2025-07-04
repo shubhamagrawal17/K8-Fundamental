@@ -1,0 +1,26 @@
+# node-info-daemonset.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-info-collector
+  labels:
+    app: node-info-collector
+spec:
+  selector:
+    matchLabels:
+      app: node-info-collector
+  template:
+    metadata:
+      labels:
+        app: node-info-collector #Labels for the Pods created by this DaemonSet.
+    spec:
+      # We don't need nodeSelector or tolerations here, as we want it on the default node.
+      containers:
+        - name: info-collector-container
+          image: busybox:latest # A small, simple image
+          command: ["sh", "-c"]
+          args:
+            [
+              "while true; do echo 'Hello from node: $(hostname) at $(date)'; sleep 5; done",
+            ]
+      terminationGracePeriodSeconds: 5 #This gives the Pod a short time to shut down gracefully when a node is removed or the DaemonSet is deleted.
