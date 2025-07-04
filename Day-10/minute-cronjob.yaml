@@ -1,0 +1,28 @@
+apiVersion: batch/v1 # API version for CronJob resources
+kind: CronJob # Declares this as a CronJob
+metadata:
+  name: demo-cronjob # Name of the CronJob
+
+spec:
+  schedule: "*/1 * * * *" # Runs every minute (for demo purposes)
+
+  jobTemplate: # Template for the Job that will run at each scheduled time
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cron-task-runner # Name of the container
+              image: busybox # Lightweight Linux image
+              command:
+                - "/bin/sh"
+                - "-c"
+                - |
+                  echo 'Scheduled task running at: $(date)';
+                  sleep 5;
+                  echo 'Task complete for this minute.'
+                  # Simulates a task: logs start time, waits 5 seconds, logs completion
+          restartPolicy: OnFailure # Restart the Pod if the container fails
+
+  successfulJobsHistoryLimit: 2 # Keep the last 2 successful Jobs (older ones are cleaned up)
+  failedJobsHistoryLimit: 1 # Keep only the most recent failed Job
+  concurrencyPolicy: Allow # Allows a new Job to start even if the previous one hasn't finished
