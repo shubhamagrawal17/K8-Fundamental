@@ -60,7 +60,7 @@ Hello from my Kubernetes Job!
 Task Finished Successfully!
 ```
 
-This (failing-job.yaml) Kubernetes Job is intentionally designed to **fail** by exiting with code `1`. Let’s walk through how to verify and observe the retry behavior:
+### This (failing-job.yaml) Kubernetes Job is intentionally designed to **fail** by exiting with code `1`. Let’s walk through how to verify and observe the retry behavior:
 
 ---
 
