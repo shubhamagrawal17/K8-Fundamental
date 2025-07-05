@@ -20,7 +20,7 @@ spec:
           image: busybox:latest # Uses the latest BusyBox image — a minimal Linux distribution with basic shell utilities
           command: ["sh", "-c"] # Executes a shell command
           args:
-            [
-              "while true; do echo 'Hello from node: $(hostname) at $(date)'; sleep 5; done",
-            ] # Infinite loop printing a message with hostname and date every 5 seconds
+            - >
+              while true; do echo "Hello from node: $(hostname) at $(date)"; sleep 5; done
+              # Infinite loop printing a message with evaluated hostname and date every 5 seconds
       terminationGracePeriodSeconds: 5 # Allows the pod 5 seconds to shut down gracefully on deletion or node drain
