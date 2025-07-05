@@ -1,4 +1,4 @@
-To verify whether your Kubernetes **Job** has completed, you can use the following commands:
+### To verify whether your Kubernetes **simple-job.yaml Job** has completed, you can use the following commands:
 
 ---
 
