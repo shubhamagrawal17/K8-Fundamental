@@ -146,3 +146,95 @@ Simulating a failure...
 
 ---
 
+
+### We're using a **parallel Job (parallel-job.yaml) ** in Kubernetes that runs **5 pods in total**, with **up to 2 running in parallel**. Here's how this works and how to verify it's functioning correctly:
+
+---
+
+## 🔧 What the Job Does
+
+* **`completions: 5`** → Total of 5 successful pods (workers) required.
+* **`parallelism: 2`** → Maximum of 2 pods run at the same time.
+* **`restartPolicy: OnFailure`** → If a pod fails, it will be retried.
+* Each pod runs a simple shell command that:
+
+  * Prints the hostname.
+  * Sleeps for 3 seconds.
+  * Prints a done message.
+
+---
+
+## ✅ How to Verify It
+
+### 1. **Apply the Job**
+
+```bash
+kubectl apply -f parallel-workers.yaml
+```
+
+---
+
+### 2. **Check Job Status**
+
+```bash
+kubectl get jobs parallel-workers
+```
+
+Example output:
+
+```
+NAME               COMPLETIONS   DURATION   AGE
+parallel-workers   5/5           15s        1m
+```
+
+This means the job successfully completed all 5 required pods.
+
+---
+
+### 3. **List the Pods**
+
+```bash
+kubectl get pods --selector=job-name=parallel-workers
+```
+
+You should see 5 pods, each with status `Completed`:
+
+```
+parallel-workers-xxxxx   Completed
+parallel-workers-yyyyy   Completed
+...
+```
+
+---
+
+### 4. **Check Logs for All Pods**
+
+Each pod logs its own work with a unique hostname.
+
+You can check logs one-by-one:
+
+```bash
+kubectl logs <pod-name>
+```
+
+Or all at once using a loop:
+
+
+
+Expected output from each pod:
+
+```
+Worker parallel-workers-xxxxx processing...
+Worker parallel-workers-xxxxx finished.
+```
+
+---
+
+## 📌 Notes
+
+* The parallelism makes the job more efficient by letting 2 workers run at the same time.
+* If any pod fails, it will be retried (due to `OnFailure`) until 5 **successful** completions.
+* After completion, the pods remain unless you manually clean them up or set a TTL.
+
+---
+
