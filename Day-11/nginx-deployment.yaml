@@ -1,0 +1,28 @@
+# nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-configmap-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-configmap-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-configmap-demo
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html # This is crucial! It tells Kubernetes to mount only the 'index.html' key as a file.
+      volumes:
+        - name: config-volume
+          configMap:
+            name: nginx-custom-page

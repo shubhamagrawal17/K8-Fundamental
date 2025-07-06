@@ -1,0 +1,13 @@
+# nginx-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-configmap-service
+spec:
+  selector:
+    app: nginx-configmap-demo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer # Or NodePort if you're on Minikube/local cluster
