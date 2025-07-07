@@ -17,7 +17,7 @@ spec:
                 - "/bin/sh"
                 - "-c"
                 - |
-                  echo 'Scheduled task running at: $(date)';
+                  echo "Scheduled task running at: $(date)";
                   sleep 5;
                   echo 'Task complete for this minute.'
                   # Simulates a task: logs start time, waits 5 seconds, logs completion
