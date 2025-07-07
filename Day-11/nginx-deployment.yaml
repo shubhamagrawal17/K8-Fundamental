@@ -1,28 +1,31 @@
 # nginx-deployment.yaml
+# This Deployment runs an Nginx pod that uses a ConfigMap to serve a custom index.html page
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-configmap-demo
+  name: nginx-configmap-demo  # Name of the Deployment
 spec:
-  replicas: 1
+  replicas: 1  # Run a single replica/pod
   selector:
     matchLabels:
-      app: nginx-configmap-demo
+      app: nginx-configmap-demo  # Match the pod label to associate with this Deployment
   template:
     metadata:
       labels:
-        app: nginx-configmap-demo
+        app: nginx-configmap-demo  # Label used by selector
     spec:
       containers:
-        - name: nginx
-          image: nginx:latest
+        - name: nginx  # Name of the container
+          image: nginx:latest  # Official Nginx image from Docker Hub
           ports:
-            - containerPort: 80
+            - containerPort: 80  # Expose port 80 inside the container (default for Nginx)
           volumeMounts:
-            - name: config-volume
-              mountPath: /usr/share/nginx/html/index.html
-              subPath: index.html # This is crucial! It tells Kubernetes to mount only the 'index.html' key as a file.
+            - name: config-volume  # This name must match the volume defined below
+              mountPath: /usr/share/nginx/html/index.html  # Path inside container where file will be mounted
+              subPath: index.html  # Only the 'index.html' key from the ConfigMap will be mounted here
+
       volumes:
-        - name: config-volume
+        - name: config-volume  # Define a volume that maps to a ConfigMap
           configMap:
-            name: nginx-custom-page
+            name: nginx-custom-page  # Name of the ConfigMap that contains the custom index.html
