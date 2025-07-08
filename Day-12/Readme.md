@@ -45,19 +45,24 @@ Now create a deployment that uses the Secret in two ways — as environment vari
 kubectl apply -f nginx-secret-demo.yaml
 # Output: deployment.apps/nginx-secret-demo created
 ```
-## Step 7: Verify the Pod
-Check if environment variables are working:
+## Step 7: Inspect Environment Variables in the Pod
 ```bash
-kubectl exec $(kubectl get pod -l app=nginx-secret-demo -o jsonpath='{.items[0].metadata.name}') -- printenv | grep MY_APP_
+kubectl exec -it <pod-name> -- /bin/bash
 
 Output:
 MY_APP_USERNAME=myuser  
 MY_APP_PASSWORD=supersecretpass
 
 ```
-Check the mounted files:
+Inspect Mounted Secret Files:
+From the same shell inside the container:
 ```bash
-kubectl exec $(kubectl get pod -l app=nginx-secret-demo -o jsonpath='{.items[0].metadata.name}') -- ls /etc/app-secrets
+ls /etc/app-secrets
+You should see two files: username and password.
+Read their contents:
+cat /etc/app-secrets/username
+cat /etc/app-secrets/password
+
 # Output: password  username
 
 kubectl exec $(kubectl get pod -l app=nginx-secret-demo -o jsonpath='{.items[0].metadata.name}') -- cat /etc/app-secrets/username
