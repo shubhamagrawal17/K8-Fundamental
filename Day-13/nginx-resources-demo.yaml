@@ -1,0 +1,29 @@
+# nginx-resources-demo.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-resources-demo
+  labels:
+    app: nginx-resources
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-resources
+  template:
+    metadata:
+      labels:
+        app: nginx-resources
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources: # This is where we define our requests and limits
+            requests:
+              cpu: "100m" # Request 100 millicores (0.1 CPU core)
+              memory: "128Mi" # Request 128 MiB of memory
+            limits:
+              cpu: "200m" # Limit to 200 millicores (0.2 CPU cores)
+              memory: "256Mi" # Limit to 256 MiB of memory
