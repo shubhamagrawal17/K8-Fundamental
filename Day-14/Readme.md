@@ -112,7 +112,7 @@ If the pod is newly scheduled:
 
 # Remove Taint
 ```python
-kubectl taint nodes <node-name> <key>=<value>:<effect>-
+kubectl taint nodes docker-desktop env=prod:NoSchedule-
 ```
 The - at the end is what tells Kubernetes to remove the taint.
                          
