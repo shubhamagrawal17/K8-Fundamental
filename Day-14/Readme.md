@@ -110,4 +110,9 @@ If the pod is newly scheduled:
 
  - Without toleration → ❌ Not scheduled
 
+# Remove Taint
+```python
+kubectl taint nodes <node-name> <key>=<value>:<effect>-
+```
+The - at the end is what tells Kubernetes to remove the taint.
                          
