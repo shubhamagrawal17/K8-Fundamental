@@ -1,0 +1,10 @@
+# 01-namespaces.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: service-producer
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: service-consumer

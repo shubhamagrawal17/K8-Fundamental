@@ -1,0 +1,13 @@
+# 03-busybox-consumer.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-consumer-pod
+  namespace: service-consumer
+spec:
+  containers:
+    - name: busybox-container
+      image: busybox:latest
+      command: ["sh", "-c", "echo 'Waiting for commands...' && sleep 3600"] # Keep container running
+      # No port needed for this demo, just for outbound connections
+  restartPolicy: Always
