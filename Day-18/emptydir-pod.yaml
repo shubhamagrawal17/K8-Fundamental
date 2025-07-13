@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-emptydir-app
+spec:
+  containers:
+    - name: busybox-container
+      image: busybox:latest
+      command:
+        ["sh", "-c", "while true; do echo 'App is running...'; sleep 5; done"]
+      # Define how the volume will be used inside this container
+      volumeMounts:
+        - name: my-temp-storage # This must match the 'name' of a volume defined below
+          mountPath: /data/temp # The path *inside the container* where the volume content will appear
+
+  # Define the volumes for this Pod
+  volumes:
+    - name: my-temp-storage # A unique name for this volume within the Pod
+      emptyDir:
+        {} # This specifies that it is an emptyDir type volume.
+        # It starts empty and gets created when the Pod is scheduled.
+        # Its content is deleted when the Pod is deleted.
