@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-with-pvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-pvc-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-pvc-demo
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: my-persistent-storage
+          mountPath: /usr/share/nginx/html/data # Nginx serves from here, so we'll write a file to this path or you can use any path
+      volumes:
+      - name: my-persistent-storage
+        persistentVolumeClaim:
+          claimName: my-local-pvc
