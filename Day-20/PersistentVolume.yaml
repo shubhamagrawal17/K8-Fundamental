@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-local-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain # Or Delete, Recycle (Recycle is deprecated)
+  hostPath:
+    # This path needs to exist on your host machine (where Docker Desktop runs) because we need some form of underlying storage that the PV can represent.
+    path: "/Users/YOUR_USERNAME/data/pv-demo" 
