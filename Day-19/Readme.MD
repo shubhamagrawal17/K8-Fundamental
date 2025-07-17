@@ -20,6 +20,12 @@ Wait for the debug pod to start and for you to get a shell prompt like / #.
 - Inside the debug shell (/ # prompt):
 - Change directory to the host's root: cd /host
 - Create the desired directory for your HostPath volume:
+## What it actually does:
+- It schedules a temporary pod on the specified node (desktop-worker).
+- That pod runs the busybox image so you can interact with it like a shell.
+- You can then run commands like ls, top, ps, df, etc., to inspect the node's environment, filesystem, and processes.
+- It's very useful when you don’t have direct SSH access to nodes but still need to inspect or troubleshoot issues.
+
 ```python
 mkdir -p /mnt/hostpath-demo
 ```
