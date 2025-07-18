@@ -8,10 +8,9 @@ spec:
       image: busybox
       command: ["sh", "-c", "sleep 3600"]
       volumeMounts:
-        - name: hostpath
+        - name: pvc-storage
           mountPath: /mnt/host
   volumes:
-    - name: hostpath
-      hostPath:
-        path: /data/pv-demo
-        type: Directory
+    - name: pvc-storage
+      persistentVolumeClaim:
+        claimName: my-pvc
