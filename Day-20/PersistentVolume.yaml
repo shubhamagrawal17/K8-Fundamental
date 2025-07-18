@@ -7,7 +7,7 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain # Or Delete, Recycle (Recycle is deprecated)
+  persistentVolumeReclaimPolicy: Retain
   hostPath:
-    # This path needs to exist on your host machine (where Docker Desktop runs) because we need some form of underlying storage that the PV can represent.
-    path: "/Users/YOUR_USERNAME/data/pv-demo" 
+    path: /data/pv-demo
+    type: DirectoryOrCreate
