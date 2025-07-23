@@ -1,0 +1,13 @@
+# nginx-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  type: LoadBalancer # Docker Desktop provides a simple LoadBalancer implementation
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

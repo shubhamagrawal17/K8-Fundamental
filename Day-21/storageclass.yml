@@ -1,0 +1,10 @@
+# my-storageclass.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: my-fast-storage
+provisioner: docker.io/hostpath # Using the built-in hostpath provisioner for Docker Desktop
+reclaimPolicy: Retain # We'll set this to Retain to show the PV is not deleted automatically
+volumeBindingMode: Immediate # Let's make this immediate for demo purposes
+parameters:
+  type: fast # A dummy parameter, hostpath doesn't use it, but shows the concept
