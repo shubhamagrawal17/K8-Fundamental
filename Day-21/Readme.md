@@ -1,4 +1,4 @@
-# Steps
+# StorageClasses Demo
 
 1. Verify Existing StorageClasses:
 
