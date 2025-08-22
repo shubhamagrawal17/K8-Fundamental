@@ -5,16 +5,16 @@ metadata:
   name: allow-frontend-to-backend
   namespace: default
 spec:
-  podSelector:
-    matchLabels:
+  podSelector:  # Selects the pods to which this policy applies.
+    matchLabels: # A map of key-value pairs to match pod labels.
       app: backend
   policyTypes:
-    - Ingress
-  ingress:
+    - Ingress  # This policy only applies to incoming traffic to the selected pods.
+  ingress:  # A list of rules that allow incoming traffic.
     - from:
         - podSelector:
             matchLabels:
-              app: frontend
+              app: frontend  # Allows incoming traffic from any pod with the label `app: frontend`.
       ports:
         - protocol: TCP
-          port: 80
+          port: 80  # Traffic is allowed on port 80.
