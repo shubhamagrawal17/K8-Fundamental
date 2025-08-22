@@ -9,12 +9,12 @@ spec:
     matchLabels:
       app: frontend
   policyTypes:
-    - Egress
-  egress:
-    - to:
-        - podSelector:
+    - Egress  # This policy only applies to outgoing (egress) traffic from the selected pods.
+  egress:    # A list of rules that allow outgoing traffic.
+    - to:  # Specifies the destination of the allowed traffic.
+        - podSelector:  # Selects the pods that can be the destination.
             matchLabels:
-              app: backend
+              app: backend  # Allows traffic to any pod with the label `app: backend`.
       ports:
         - protocol: TCP
           port: 80
