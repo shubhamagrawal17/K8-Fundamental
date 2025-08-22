@@ -5,18 +5,18 @@ metadata:
   name: allow-dns
   namespace: default
 spec:
-  podSelector: {}
+  podSelector: {} # An empty selector, meaning this policy applies to ALL pods in the 'default' namespace.
   policyTypes:
-    - Egress
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
+    - Egress  # Specifies that this policy governs outgoing (egress) traffic.
+  egress:  # The list of allowed egress rules.
+    - to:  # Specifies who the pods are allowed to communicate with.
+        - namespaceSelector: {} # This empty selector targets ALL namespaces.
+            matchLabels:  # This matches pods within those namespaces.
               kubernetes.io/metadata.name: kube-system
           podSelector:
             matchLabels:
-              k8s-app: kube-dns
-      ports:
+              k8s-app: kube-dns  # Specifically targets pods with the label 'k8s-app: kube-dns', which are the DNS pods.
+      ports:   # The ports and protocols allowed for the egress traffic.
         - protocol: UDP
           port: 53
         - protocol: TCP
