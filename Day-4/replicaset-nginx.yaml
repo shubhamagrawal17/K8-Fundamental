@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: nginx-replicaset
+  namespace: default
 spec:
   replicas: 3 # We want 3 copies of our Nginx Pod
   selector:
