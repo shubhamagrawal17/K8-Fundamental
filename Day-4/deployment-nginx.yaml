@@ -5,7 +5,7 @@ metadata:
   name: nginx-deployment
   namespace: default
 spec:
-  replicas: 4 # We want 3 copies of our Pods
+  replicas: 3 # We want 3 copies of our Pods
   selector:
     matchLabels:
       app: nginx-app # Selector for the Pods managed by this deployment
